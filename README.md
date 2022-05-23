@@ -10,6 +10,7 @@ Requerimientos:
 - Historia de usuario (opcional): Cuando elimino una imagen, puedo introducir mi contraseña.
 
 
+
 Iconos
 [enlace iconos](https://google.github.io/material-design-icons/)
 
