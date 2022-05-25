@@ -33,6 +33,7 @@ BASE_APPS = [
 
 LOCAL_APPS = [
     'users',
+    'albums',
 ]
 
 THIRD_APPS = [

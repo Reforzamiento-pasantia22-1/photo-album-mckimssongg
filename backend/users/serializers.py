@@ -1,25 +1,5 @@
 from rest_framework import serializers
-from django.contrib.auth import authenticate
 from .models import *
-from rest_framework.authtoken.models import Token
-from rest_framework.validators import UniqueValidator
-
-
-class UserLoginSerializer(serializers.Serializer):
-    username = serializers.CharField(max_length=255)
-    password = serializers.CharField(max_length=128, write_only=True)
-
-    def validate(self, data):
-        user = authenticate(
-            username=data['username'], password=data['password'])
-        if user is None:
-            raise serializers.ValidationError("El usuario no existe")
-        self.context['user'] = user
-        return data
-
-    def create(self, validated_data):
-        token, created = Token.objects.get_or_create(user=self.context['user'])
-        return self.context['user'], token.key
 
 
 class UserSerializer(serializers.ModelSerializer):
@@ -38,6 +18,14 @@ class UserSerializer(serializers.ModelSerializer):
         update_user.set_password(validated_data['password'])
         update_user.save()
         return update_user
+
+    def to_representation(self, instance):
+        return {
+            'id': instance.id,
+            'username': instance.username,
+            'email': instance.email,
+            'is_superuser': instance.is_superuser,
+        }
 
 
 class UserListSerializer(serializers.ModelSerializer):

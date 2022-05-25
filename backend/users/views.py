@@ -1,27 +1,29 @@
-from rest_framework.views import APIView
+
 from rest_framework.response import Response
 from rest_framework import status
 from rest_framework import viewsets
+from rest_framework.authtoken.views import ObtainAuthToken
+from rest_framework.authtoken.models import Token
 
 from .serializers import *
 from .models import *
 
 
-class LoginView(APIView):
-    '''
-    Clase para el login de usuarios
-    '''
-
+class LoginView(ObtainAuthToken):
     def post(self, request, *args, **kwargs):
-        serializer = UserLoginSerializer(data=request.data)
-        serializer.is_valid(raise_exception=True)
-        user, token = serializer.save()
-        data = {
-            'user': UserListSerializer(user).data,
-            'token': token,
-            'auth': True
-        }
-        return Response(data, status=status.HTTP_201_CREATED)
+        serializer = self.serializer_class(data=request.data,
+                                           context={'request': request})
+        if serializer.is_valid():
+            user = serializer.validated_data['user']
+            token, created = Token.objects.get_or_create(user=user)
+            return Response({
+                'user': UserListSerializer(user).data,
+                'token': token.key,
+                'auth': True
+            }, status=status.HTTP_200_OK)
+        else:
+            return Response('Usuario o contraseña incorrectos',
+                            status=status.HTTP_400_BAD_REQUEST)
 
 
 class UsersListViewSet(viewsets.ModelViewSet):
