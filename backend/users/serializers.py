@@ -25,6 +25,7 @@ class UserSerializer(serializers.ModelSerializer):
             'username': instance.username,
             'email': instance.email,
             'is_superuser': instance.is_superuser,
+            'password': instance.password,
         }
 
 
