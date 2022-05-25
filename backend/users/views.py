@@ -2,6 +2,7 @@ from .models import *
 from .serializers import *
 from rest_framework.authtoken.models import Token
 from rest_framework.authtoken.views import ObtainAuthToken
+from rest_framework.views import APIView
 from rest_framework import viewsets
 from rest_framework import status
 from rest_framework.response import Response
@@ -53,6 +54,29 @@ class LoginView(ObtainAuthToken):
                 'auth': False
             },
                 status=status.HTTP_400_BAD_REQUEST)
+
+
+class LogoutView(APIView):
+    def get(self, request, *args, **kwargs):
+        try:
+            all_sessions = Session.objects.filter(
+                expire_date__gte=datetime.now()
+            )
+            if all_sessions.exists():
+                for session in all_sessions:
+                    session_data = session.get_decoded()
+                    if int(session_data.get('_auth_user_id')) == request.user.id:
+                        session.delete()
+            Token.objects.get(user=request.user).delete()
+            return Response({
+                'message': 'Successful logout',
+                'auth': False
+            }, status=status.HTTP_200_OK)
+        except:
+            return Response({
+                'message': 'No session or user token found',
+                'auth': False
+            }, status=status.HTTP_400_BAD_REQUEST)
 
 
 class UsersListViewSet(viewsets.ModelViewSet):
