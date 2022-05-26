@@ -17,7 +17,7 @@ class AlbumViewSet(ModelViewSet):
         album = self.get_object()
         album.delete()
 
-        return Response({"message": "El album fue eliminado"}, status=status.HTTP_200_OK)
+        return Response({"message": "The album was deleted"}, status=status.HTTP_200_OK)
 
     def update(self, request, *args, **kwargs):
         album = self.get_object()
@@ -42,7 +42,7 @@ class ImageViewSet(ModelViewSet):
         image = self.get_object()
         image.delete()
 
-        return Response({"message": "La imagen fue eliminada"}, status=status.HTTP_200_OK)
+        return Response({"message": "The image was removed"}, status=status.HTTP_200_OK)
 
     def update(self, request, *args, **kwargs):
         image = self.get_object()
