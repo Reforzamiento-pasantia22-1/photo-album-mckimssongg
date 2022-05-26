@@ -14,7 +14,8 @@ class Album(models.Model):
 
 
 class Image(models.Model):
-    album = models.ForeignKey(Album, on_delete=models.CASCADE)
+    album = models.ForeignKey(
+        Album, related_name='images', on_delete=models.CASCADE)
     label = models.CharField(max_length=255)
     description = models.CharField(max_length=255)
     link = models.CharField(max_length=255)
