@@ -89,6 +89,7 @@ class UsersListViewSet(viewsets.ModelViewSet):
 class UsersViewSet(viewsets.ModelViewSet):
     queryset = User.objects.all()
     serializer_class = UserSerializer
+    permission_classes = [IsAuthenticated]
 
     def destroy(self, request, *args, **kwargs):
         user = self.get_object()
