@@ -2,13 +2,30 @@ from django.shortcuts import render
 from .models import *
 from .serializers import *
 from rest_framework.viewsets import ModelViewSet
+from rest_framework.generics import ListAPIView
 from rest_framework.response import Response
 from rest_framework import status
 from rest_framework.permissions import IsAuthenticated
 # Create your views here.
 
 
+class SearchImageView(ListAPIView):
+    serializer_class = ImageSerializer
+    permission_classes = [IsAuthenticated]
+
+    def get_queryset(self):
+        albumParam = self.request.query_params.get('album')
+        labelParam = self.request.query_params.get('label')
+        if labelParam is not None:
+            queryset = Image.objects.filter(
+                label=labelParam,
+                album__name=albumParam,
+            )
+        return queryset
+
+
 class AlbumViewSet(ModelViewSet):
+    ''''''
     queryset = Album.objects.all()
     serializer_class = AlbumSerializer
     permission_classes = [IsAuthenticated]
@@ -34,6 +51,8 @@ class AlbumViewSet(ModelViewSet):
 
 
 class ImageViewSet(ModelViewSet):
+    '''
+    '''
     queryset = Image.objects.all()
     serializer_class = ImageSerializer
     permission_classes = [IsAuthenticated]

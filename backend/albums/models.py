@@ -7,6 +7,7 @@ class Album(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE)
     name = models.CharField(max_length=255)
     description = models.CharField(max_length=255)
+    is_activate = models.BooleanField(default=True)
     is_public = models.BooleanField(default=False)
 
     def __str__(self):
@@ -18,6 +19,7 @@ class Image(models.Model):
         Album, related_name='images', on_delete=models.CASCADE)
     label = models.CharField(max_length=255)
     description = models.CharField(max_length=255)
+    is_activate = models.BooleanField(default=True)
     link = models.CharField(max_length=255)
 
     def __str__(self):
