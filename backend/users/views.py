@@ -2,6 +2,7 @@ from .models import *
 from .serializers import *
 from rest_framework.authtoken.models import Token
 from rest_framework.authtoken.views import ObtainAuthToken
+from rest_framework.permissions import IsAuthenticated
 from rest_framework.views import APIView
 from rest_framework import viewsets
 from rest_framework import status
@@ -82,6 +83,7 @@ class LogoutView(APIView):
 class UsersListViewSet(viewsets.ModelViewSet):
     queryset = User.objects.all()
     serializer_class = UserListSerializer
+    permission_classes = [IsAuthenticated]
 
 
 class UsersViewSet(viewsets.ModelViewSet):

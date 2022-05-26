@@ -1,3 +1,4 @@
+from apps.users.authentication import ExpiringTokenAuthentication
 from rest_framework.authentication import TokenAuthentication
 from rest_framework.exceptions import AuthenticationFailed
 from datetime import timedelta
