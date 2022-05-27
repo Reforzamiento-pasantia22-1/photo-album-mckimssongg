@@ -40,6 +40,24 @@ class AlbumViewSet(ModelViewSet):
     serializer_class = AlbumSerializer
     # permission_classes = [IsAuthenticated]
 
+    def get_queryset(self):
+        queryset = []
+        userId = self.request.query_params.get('userId', None)
+        if userId is not None:
+            queryset = Album.objects.filter(
+                is_activate=True,
+                user_id=int(userId))
+        return queryset
+
+    # http://127.0.0.1:8000/albums/albums/?userId=1
+    def list(self, request, *args, **kwargs):
+        queryset = self.get_queryset()
+        if len(queryset) == 0:
+            return Response({"message": "The album was not found"}, status=status.HTTP_404_NOT_FOUND)
+        serializer = self.get_serializer(queryset, many=True)
+        return Response(serializer.data, status=status.HTTP_200_OK)
+
+    # http://127.0.0.1:8000/albums/albums/{album_id}/?userId=1
     def destroy(self, request, *args, **kwargs):
         album = self.get_object()
         album.delete()

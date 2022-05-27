@@ -10,9 +10,6 @@ urlpatterns = router.urls
 
 
 urlpatterns += [
-    path('userlist', views.UsersListViewSet.as_view(
-        {'get': 'list'}),
-        name='users'),
     path('login', views.LoginView.as_view(), name='login'),
     path('logout', views.LogoutView.as_view(), name='logout'),
 ]

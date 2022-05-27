@@ -24,14 +24,17 @@ class UserSerializer(serializers.ModelSerializer):
             'id': instance.id,
             'username': instance.username,
             'email': instance.email,
-            'is_superuser': instance.is_superuser,
             'password': instance.password,
+            'is_superuser': instance.is_superuser,
+            'is_staff': instance.is_staff,
+            'is_active': instance.is_active,
         }
 
 
 class UserListSerializer(serializers.ModelSerializer):
+    albums = serializers.StringRelatedField(many=True)
     '''
-    serializador para listar 
+    serializador para listar
     '''
     class Meta:
         model = User
@@ -42,4 +45,7 @@ class UserListSerializer(serializers.ModelSerializer):
             'id': instance.id,
             'username': instance.username,
             'email': instance.email,
+            'albums': [{'id': album.id,
+                        'name': album.name,
+                        } for album in instance.albums.filter(is_activate=True)]
         }

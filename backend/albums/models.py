@@ -4,7 +4,8 @@ from users.models import User
 
 
 class Album(models.Model):
-    user = models.ForeignKey(User, on_delete=models.CASCADE)
+    user = models.ForeignKey(
+        User, related_name='albums', on_delete=models.CASCADE)
     name = models.CharField(max_length=255)
     description = models.CharField(max_length=255)
     is_activate = models.BooleanField(default=True)
