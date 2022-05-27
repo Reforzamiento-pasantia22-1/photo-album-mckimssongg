@@ -68,7 +68,7 @@
   }
 
   /**
-   * @description: Make a request to the server without the token and without a body
+   * @description: Make a request to the server without the token
    * @param {string} url - url to make the request
    * @param {string} method - method to make the request
    * @returns {object} response of the request
