@@ -10,7 +10,7 @@ from rest_framework.permissions import IsAuthenticated
 
 
 class SearchImageView(GenericViewSet):
-    # permission_classes = [IsAuthenticated]
+    permission_classes = [IsAuthenticated]
     serializer_class = ImageSerializer
 
     # http://127.0.0.1:8000/albums/searchImage/?label=japon&userId=1
@@ -38,7 +38,7 @@ class AlbumViewSet(ModelViewSet):
     ''''''
     queryset = Album.objects.all()
     serializer_class = AlbumSerializer
-    # permission_classes = [IsAuthenticated]
+    permission_classes = [IsAuthenticated]
 
     def get_queryset(self):
         queryset = []
@@ -83,7 +83,7 @@ class ImageViewSet(GenericViewSet):
     '''
     queryset = Image.objects.all()
     serializer_class = ImageSerializer
-    # permission_classes = [IsAuthenticated]
+    permission_classes = [IsAuthenticated]
 
     def create(self, request, *args, **kwargs):
         image_data = request.data

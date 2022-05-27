@@ -40,6 +40,8 @@ THIRD_APPS = [
     'rest_framework',
     'rest_framework.authtoken',
     "corsheaders",
+    # 'django.contrib.staticfiles',
+    'drf_yasg',
 ]
 
 INSTALLED_APPS = BASE_APPS+LOCAL_APPS+THIRD_APPS
