@@ -1,8 +1,11 @@
 import React from "react"
-import fetchData from "./services/Api"
+import {
+  BrowserRouter,
+  Routes,
+  Route,
+} from "react-router-dom";
 
 function App() {
-  const fetchApi = fetchData.getInstance();
   return (
     <React.Fragment>
       <h1></h1>

@@ -13,6 +13,12 @@ from datetime import datetime
 
 class LoginView(ObtainAuthToken):
     def post(self, request, *args, **kwargs):
+        '''
+        Returns the user information and the token
+
+        parameters.
+        request ----> request object
+        '''
         serializer = self.serializer_class(data=request.data,
                                            context={'request': request})
         if serializer.is_valid():
