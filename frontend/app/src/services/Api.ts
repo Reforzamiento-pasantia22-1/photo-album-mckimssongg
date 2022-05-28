@@ -1,3 +1,7 @@
+import authUser from "../utils/auth";
+
+const auth = authUser.getInstance();
+
 /**
  * @description Api service to make requests to the server and get the response
  * */ export default class fetchData {
@@ -9,7 +13,7 @@
 
   private static init(): void {
     fetchData._url = "http://localhost:8000/";
-    fetchData._token = localStorage.getItem("token");
+    fetchData._token = auth.dataUser ? auth.token : "";
   }
 
   /**

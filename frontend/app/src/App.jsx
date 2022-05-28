@@ -1,16 +1,25 @@
-import React from "react"
-import {
-  BrowserRouter,
-  Routes,
-  Route,
-} from "react-router-dom";
+import React, { Component } from "react";
+import { Route, Routes } from "react-router-dom";
+import Home from "./pages/Home";
+import {PrivateRoute} from "./routes/Private.routes";
 
-function App() {
-  return (
-    <React.Fragment>
-      <h1></h1>
-    </React.Fragment>
-  )
+class App extends Component {
+  constructor(props) {
+    super(props);
+  }
+  render() {
+    return (
+      <React.Fragment>
+        <Routes>
+          <Route path="/" element={<Home />} />
+          {/* <Route
+            path="/:album"
+            element={<PrivateRoute component={Panel} />}
+          ></Route> */}
+        </Routes>
+      </React.Fragment>
+    );
+  }
 }
 
-export default App
+export default App;
