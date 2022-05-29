@@ -25,7 +25,7 @@ class LoginView(ObtainAuthToken):
             user = serializer.validated_data['user']
             if user.is_active:
                 token, created = Token.objects.get_or_create(user=user)
-                user_serializer = UserListSerializer(user)
+                user_serializer = UserGetDataSerializer(user)
                 if created:
                     return Response({
                         'token': token.key,

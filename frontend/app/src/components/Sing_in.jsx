@@ -3,10 +3,13 @@ import {HiUserCircle} from "react-icons/hi";
 
 function Sing_in() {
   return (
-    <div class="navbar-brand d-flex align-items-center" >
+    <button className="d-flex align-items-center btn text-white" 
+    onClick={()=>{
+      window.location.reload();
+    }}>
       <HiUserCircle />
       Sing In
-    </div>
+    </button>
   );
 }
 
