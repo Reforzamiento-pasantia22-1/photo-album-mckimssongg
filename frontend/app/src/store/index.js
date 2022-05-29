@@ -1,4 +1,6 @@
 import { createStore } from 'redux';
 import AppUI from './reducers/index';
 
-let store = createStore(AppUI);
+let Store = createStore(AppUI);
+
+export default Store;
