@@ -31,10 +31,10 @@ function Navbar({ visibility }) {
             ) : (
               <Sing_in />
             )}
-            {true ? (
+            {auth.dataUser.auth ? (
               <Add_a_photo_button color={"info"} />
             ) : (
-              <Add_a_photo_button color={"secondary"} />
+              <Add_a_photo_button color={"secondary disabled"} />
             )}
           </div>
           <button
@@ -49,7 +49,7 @@ function Navbar({ visibility }) {
             <FiSearch />
           </button>
         </div>
-        <div className="collapse navbar-collapse my-2 w-50" id="navbarColor01">
+        <div className="collapse navbar-collapse my-3 w-50" id="navbarColor01">
           <Search />
         </div>
       </nav>

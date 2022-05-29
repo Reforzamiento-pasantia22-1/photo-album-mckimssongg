@@ -1,21 +1,23 @@
 import React from "react";
-import {RiLogoutBoxFill} from "react-icons/ri";
+import { RiLogoutBoxFill } from "react-icons/ri";
 import Store from "../store/index";
-import {connect} from "react-redux";
-import { open } from '../store/actions/actions_modal'
+import { connect } from "react-redux";
+import { open } from "../store/actions/actions_modal";
 
 const mapStateToProps = (state) => {
   return {
-    auth: state.reducer
+    auth: state.reducer,
   };
 };
 
-
-function Logout({name}) {
+function Logout({ name }) {
   return (
-    <button className="d-flex align-items-center btn text-white" onClick={ () => {
-      Store.dispatch(open)
-    }}>
+    <button
+      className="btn btn-outline-light me-3 btn-lg"
+      onClick={() => {
+        Store.dispatch(open);
+      }}
+    >
       <RiLogoutBoxFill />
       {name}
     </button>
