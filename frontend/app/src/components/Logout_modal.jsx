@@ -1,6 +1,7 @@
 import React from "react";
 import Store from "../store";
 import { closed } from "../store/actions/actions_modal";
+import { loginFailure } from "../store/actions/actions_login";
 function Logout_modal() {
   return (
     <div
@@ -12,10 +13,18 @@ function Logout_modal() {
         <button
           className="btn btn-danger my-3 w-50"
           onClick={() => {
+
+            Store.dispatch(
+              loginFailure({
+                message: "log out success",
+                auth: false,
+              })
+            );
+            window.location.reload();
             Store.dispatch(closed);
           }}
         >
-            log out
+          log out
         </button>
         <button
           className="btn btn-primary my-3 "

@@ -21,15 +21,20 @@ function Form_login() {
 
   const getData = fetchData.getInstance();
 
-  const handleSubmit = async(e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    const loginData = await getData.fetchWithoutToken("users/login", "POST", data);
+    const loginData = await getData.fetchWithoutToken(
+      "users/login",
+      "POST",
+      data
+    );
     console.log(loginData);
     if (loginData.auth) {
       loginSuccess(loginData);
+
+      window.location.reload();
       Store.dispatch(closed);
-    }
-    else {
+    } else {
       loginFailure(loginData);
     }
   };
@@ -66,11 +71,7 @@ function Form_login() {
               />
             </div>
             <div className="d-flex align-items-center justify-content-center">
-              <button
-                className="btn btn-outline-light m-3 w-50"
-              >
-                log In
-              </button>
+              <button className="btn btn-outline-light m-3 w-50">log In</button>
               <button
                 className="btn btn-outline-dark m-3 w-50"
                 onClick={() => {
@@ -155,4 +156,4 @@ function Form_login() {
   );
 }
 
-export default Form_login
+export default Form_login;

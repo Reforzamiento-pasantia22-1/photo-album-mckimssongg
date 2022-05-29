@@ -15,7 +15,7 @@ import { FiSearch } from "react-icons/fi";
 
 const mapStateToProps = (state) => {
   return {
-    visibility: state.visibilityModal.visibility,
+    visibility: state.visibilityModal.visibility
   };
 };
 
@@ -60,4 +60,5 @@ function Navbar({ visibility }) {
   );
 }
 
-export default connect(mapStateToProps, { open, closed })(Navbar);
+
+export default connect(mapStateToProps,null)(Navbar);

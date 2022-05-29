@@ -1,6 +1,4 @@
 const initialState = {
-  isFetching: false,
-  isAuthenticated: false,
   user: {},
   error: null,
 };
@@ -10,16 +8,12 @@ const reducer_login = (state = initialState, action) => {
     case "LOGIN_SUCCESS":
       return {
         ...state,
-        isFetching: false,
-        isAuthenticated: true,
         user: action.data,
         error: null,
       };
     case "LOGIN_FAILURE":
       return {
         ...state,
-        isFetching: false,
-        isAuthenticated: false,
         user: {},
         error: true,
       };
