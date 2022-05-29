@@ -1,20 +1,36 @@
+import Store from "../store/index";
+
+type User = {
+  token?: string;
+  auth: boolean;
+  user?: {
+    id: number;
+    username: string;
+    email: string;
+  };
+  message: string;
+};
+
 export default class authUser {
   private static instance: authUser;
-  private static _dataUser: object | boolean;
+  private static _dataUser: User;
   private static _token: string;
 
   private constructor() {}
 
   private static init(): void {
-    if (localStorage.getItem("dataUser")) {
-      this._dataUser = JSON.parse(localStorage.getItem("dataUser"));
+    if (localStorage.getItem("dataSesion")) {
+      const Session = JSON.parse(localStorage.getItem("dataSesion"));
+      authUser._dataUser = Session;
+      if (Session.auth) {
+        authUser._token = Session.token;
+      }
     } else {
-      this._dataUser = false;
-    }
-    if (this._dataUser) {
-      this._token = this._dataUser["token"];
-    } else {
-      this._token = "";
+      authUser._dataUser = {
+        auth: false,
+        message: "",
+      };
+      authUser._token = "";
     }
   }
 
@@ -26,7 +42,7 @@ export default class authUser {
     return this.instance;
   }
 
-  get dataUser(): object | boolean {
+  get dataUser(): User {
     return authUser._dataUser;
   }
 

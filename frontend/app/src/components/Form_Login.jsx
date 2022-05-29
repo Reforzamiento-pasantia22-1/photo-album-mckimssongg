@@ -1,9 +1,39 @@
 import React from "react";
+import fetchData from "../services/Api";
+import Store from "../store/index";
 import { closed } from "../store/actions/actions_modal";
-import Store from "../store";
+import { loginFailure, loginSuccess } from "../store/actions/actions_login";
+import { connect } from "react-redux";
 
 function Form_login() {
   const [ver, setVer] = React.useState(false);
+  const [data, setData] = React.useState({
+    email: "",
+    password: "",
+  });
+
+  const handleChange = (e) => {
+    setData({
+      ...data,
+      [e.target.name]: e.target.value,
+    });
+  };
+
+  const getData = fetchData.getInstance();
+
+  const handleSubmit = async(e) => {
+    e.preventDefault();
+    const loginData = await getData.fetchWithoutToken("users/login", "POST", data);
+    console.log(loginData);
+    if (loginData.auth) {
+      loginSuccess(loginData);
+      Store.dispatch(closed);
+    }
+    else {
+      loginFailure(loginData);
+    }
+  };
+
   return (
     <div
       className="form-bg bg-primary d-flex flex-column align-items-center "
@@ -12,13 +42,8 @@ function Form_login() {
       {!ver ? (
         <React.Fragment>
           <h3 className="title text-center m-4">log in now</h3>
-          {/* {error.state && (
-            <p className='alert alert-danger text-center" role="alert"'>
-              {error.message}
-            </p>
-          )} */}
           <form
-            // onSubmit={sendData}
+            onSubmit={handleSubmit}
             className="form-horizontal d-flex flex-column "
             style={{ width: "80%", maxWidth: "600px" }}
           >
@@ -28,7 +53,7 @@ function Form_login() {
                 className="form-control"
                 type="text"
                 name="username"
-                // onChange={handleChange}
+                onChange={handleChange}
               />
             </div>
             <div className="form-group m-2">
@@ -37,11 +62,15 @@ function Form_login() {
                 className="form-control"
                 type="password"
                 name="password"
-                // onChange={handleChange}
+                onChange={handleChange}
               />
             </div>
             <div className="d-flex align-items-center justify-content-center">
-              <button className="btn btn-outline-light m-3 w-50">log In</button>
+              <button
+                className="btn btn-outline-light m-3 w-50"
+              >
+                log In
+              </button>
               <button
                 className="btn btn-outline-dark m-3 w-50"
                 onClick={() => {
@@ -65,24 +94,17 @@ function Form_login() {
         <React.Fragment>
           <h3 className="title text-center m-4">Register</h3>
           <form
-            method="POST"
-            // onSubmit={sendData}
+            onSubmit={handleSubmit}
             className="form-horizontal d-flex flex-column "
             style={{ width: "80%", maxWidth: "600px" }}
           >
-
-            {/* {error.state && (
-              <div className="alert alert-danger text-center" role="alert">
-                {error.message}
-              </div>
-            )} */}
             <div className="form-group m-2 ">
               <label>User Name*</label>
               <input
                 className="form-control"
                 type="text"
                 name="username"
-                // onChange={handleChange}
+                onChange={handleChange}
               />
             </div>
             <div className="form-group m-2">
@@ -91,7 +113,7 @@ function Form_login() {
                 className="form-control"
                 type="email"
                 name="email"
-                // onChange={handleChange}
+                onChange={handleChange}
               />
             </div>
             <div className="form-group m-2">
@@ -100,7 +122,7 @@ function Form_login() {
                 className="form-control"
                 type="password"
                 name="password"
-                // onChange={handleChange}
+                onChange={handleChange}
               />
             </div>
             <div className="form-group m-2">
@@ -109,11 +131,13 @@ function Form_login() {
                 className="form-control"
                 type="password"
                 name="password_confirmation"
-                // onChange={handleChange}
+                onChange={handleChange}
               />
             </div>
             <div className="d-flex justify-content-center">
-              <button className="btn btn-outline-light m-3 w-50 ">Register now</button>
+              <button className="btn btn-outline-light m-3 w-50 ">
+                Register now
+              </button>
 
               <button
                 className="btn btn-outline-dark m-3 w-50"
@@ -131,4 +155,4 @@ function Form_login() {
   );
 }
 
-export default Form_login;
+export default connect(null, { closed, loginSuccess, loginFailure })(Form_login);

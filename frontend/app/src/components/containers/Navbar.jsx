@@ -3,10 +3,11 @@ import Sing_in from "../Sing_in";
 import Search from "../Search";
 import { FiSearch } from "react-icons/fi";
 import Add_a_photo_button from "../Add_a_photo_button";
-import Logout from "../Logout";
+import Logout_button from "../Logout_button";
 import { Modal } from "../modals/index";
 import Form_login from "../Form_Login";
 import { connect } from "react-redux";
+import authUser from "../../utils/auth";
 
 const mapStateToProps = (state) => {
   return {
@@ -15,12 +16,13 @@ const mapStateToProps = (state) => {
 };
 
 function Navbar({ visibility }) {
+  const auth = authUser.getInstance();
   return (
     <React.Fragment>
       <nav className="navbar navbar-expand-lg navbar-dark bg-primary">
         <div className="container-fluid justify-content-between ">
           <div className="d-flex align-items-center">
-            {false ? <Logout name={"Persona"} /> : <Sing_in />}
+            {auth.dataUser.auth ? <Logout_button name={auth.dataUser.user.username} /> : <Sing_in />}
             {true ? (
               <Add_a_photo_button color={"info"} />
             ) : (
@@ -43,9 +45,13 @@ function Navbar({ visibility }) {
           <Search />
         </div>
       </nav>
-      {visibility && (
+      {visibility && auth.dataUser.auth ? (
         <Modal>
           <Form_login />
+        </Modal>
+      ):(
+        <Modal>
+          <h2>Hola</h2>
         </Modal>
       )}
     </React.Fragment>

@@ -4,6 +4,6 @@ import  authUser from "../utils/auth";
 export const PrivateRoute = ({ component: RouteComponent}) => {
     const auth = authUser.getInstance()
     return (
-        auth.dataUser() ? (<RouteComponent/>) : (<Navigate to="/login" />)
+        auth.dataUser.token ? (<RouteComponent/>) : (<Navigate to="/login" />)
     );
 }

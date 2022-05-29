@@ -13,7 +13,7 @@ const auth = authUser.getInstance();
 
   private static init(): void {
     fetchData._url = "http://localhost:8000/";
-    fetchData._token = auth.dataUser ? auth.token : "";
+    fetchData._token = auth.dataUser.auth ? auth.token : "";
   }
 
   /**
