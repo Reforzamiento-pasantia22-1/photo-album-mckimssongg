@@ -7,7 +7,7 @@
     right: -10px;
     display: flex;
     justify-content: center;
-    align-items: center;
+    align-items: flex-start;
     color: #fff;
     z-index: 20;
 }

@@ -155,4 +155,4 @@ function Form_login() {
   );
 }
 
-export default connect(null, { closed, loginSuccess, loginFailure })(Form_login);
+export default Form_login
