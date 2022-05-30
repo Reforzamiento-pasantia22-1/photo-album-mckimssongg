@@ -1,14 +1,9 @@
 import React from "react";
 import { RiLogoutBoxFill } from "react-icons/ri";
 import Store from "../store/index";
-import { connect } from "react-redux";
 import { open } from "../store/actions/actions_modal";
 
-const mapStateToProps = (state) => {
-  return {
-    auth: state.reducer,
-  };
-};
+
 
 function Logout({ name }) {
   return (
@@ -24,4 +19,4 @@ function Logout({ name }) {
   );
 }
 
-export default connect(mapStateToProps, { open })(Logout);
+export default Logout;
