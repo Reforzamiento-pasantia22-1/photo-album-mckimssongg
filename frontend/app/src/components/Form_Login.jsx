@@ -12,14 +12,42 @@ function Form_login() {
     password: "",
   });
 
+  const [dataRegister, setDataRegister] = React.useState({
+    email: "",
+    password: "",
+    password_confirm: "",
+    username: "",
+  });
+
+  const [error, setError] = React.useState(false);
+
   const handleChange = (e) => {
-    setData({
-      ...data,
-      [e.target.name]: e.target.value,
-    });
+    if (!ver) {
+      setData({
+        ...data,
+        [e.target.name]: e.target.value,
+      });
+    } else {
+      setDataRegister({
+        ...dataRegister,
+        [e.target.name]: e.target.value,
+      });
+    }
   };
 
   const getData = FetchData.getInstance();
+  const [done, setDone] = React.useState(false);
+  const handleSubmitRegister = async (e) => {
+    e.preventDefault();
+    const register = await getData.fetchWithoutToken(
+      "users/users",
+      "POST",
+      dataRegister
+    );
+    if (register.username) {
+      setDone(true);
+    }
+  };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -35,6 +63,7 @@ function Form_login() {
       window.location.reload();
       dispatch(closed);
     } else {
+      setError(true);
       dispatch(loginFailure(loginData));
     }
   };
@@ -47,6 +76,7 @@ function Form_login() {
       {!ver ? (
         <React.Fragment>
           <h3 className="title text-center m-4">log in now</h3>
+          {error && <p className="text-danger">Wrong email or password</p>}
           <form
             onSubmit={handleSubmit}
             className="form-horizontal d-flex flex-column "
@@ -94,8 +124,9 @@ function Form_login() {
       ) : (
         <React.Fragment>
           <h3 className="title text-center m-4">Register</h3>
+          {done && <p className="text-success">Success</p>}
           <form
-            onSubmit={handleSubmit}
+            onSubmit={handleSubmitRegister}
             className="form-horizontal d-flex flex-column "
             style={{ width: "80%", maxWidth: "600px" }}
           >

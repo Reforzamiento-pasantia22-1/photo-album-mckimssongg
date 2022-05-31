@@ -7,10 +7,9 @@ const fetchImagesSuccess = (data) => {
   };
 };
 
-const fetchImagesFailure = (error) => {
+const fetchImagesFailure = () => {
   return {
     type: FETCH_IMAGES_FAILURE,
-    error,
   };
 };
 

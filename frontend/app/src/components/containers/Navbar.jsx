@@ -20,7 +20,6 @@ function Navbar() {
   const visibility_add_photo_modal = useSelector(
     (state) => state.visibilityModal.visibility_add_photo
   );
-  const user = useSelector((state) => state.reducer_login.user);
   return (
     <React.Fragment>
       <nav className="navbar navbar-expand-lg navbar-dark bg-primary">
@@ -49,9 +48,9 @@ function Navbar() {
             <FiSearch />
           </button>
         </div>
-        <div className="collapse navbar-collapse my-3 w-50" id="navbarColor01">
+        {/* <div className="collapse navbar-collapse my-3 w-50" id="navbarColor01">
           <Search />
-        </div>
+        </div> */}
       </nav>
       {visibility && (
         <Modal>{auth.dataUser.auth ? <Logout_modal /> : <Form_login />}</Modal>
