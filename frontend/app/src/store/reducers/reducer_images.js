@@ -26,7 +26,7 @@ const reducer_images = (state = initialState, action) => {
     case FETCH_IMAGES_SUCCESS:
       return {
         ...state,
-        images: action.data,
+        images: action.data.concat(initialState.images),
         error: null,
       };
     case FETCH_IMAGES_FAILURE:

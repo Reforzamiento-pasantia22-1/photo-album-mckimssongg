@@ -33,7 +33,7 @@ function Form_login() {
       dispatch(loginSuccess(loginData));
 
       window.location.reload();
-      dispatch(closed());
+      dispatch(closed);
     } else {
       dispatch(loginFailure(loginData));
     }

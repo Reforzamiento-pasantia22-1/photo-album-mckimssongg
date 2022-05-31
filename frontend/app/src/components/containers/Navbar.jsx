@@ -17,6 +17,10 @@ import { FiSearch } from "react-icons/fi";
 function Navbar() {
   const auth = authUser.getInstance();
   const visibility = useSelector((state) => state.visibilityModal.visibility);
+  const visibility_add_photo_modal = useSelector(
+    (state) => state.visibilityModal.visibility_add_photo
+  );
+  const user = useSelector((state) => state.reducer_login.user);
   return (
     <React.Fragment>
       <nav className="navbar navbar-expand-lg navbar-dark bg-primary">
@@ -52,7 +56,7 @@ function Navbar() {
       {visibility && (
         <Modal>{auth.dataUser.auth ? <Logout_modal /> : <Form_login />}</Modal>
       )}
-      {true && (
+      {visibility_add_photo_modal && (
         <Modal>
           <Add_a_photon_modal />
         </Modal>

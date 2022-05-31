@@ -1,21 +1,14 @@
-import { LOGIN_FAILURE, LOGIN_SUCCESS, LOGIN_REQUEST } from "../constants";
+import {
+  LOGIN_FAILURE,
+  LOGIN_SUCCESS,
+  LOGIN_REQUEST,
+} from "../constants/index";
 
 const loginSuccess = (data) => {
-  localStorage.setItem(
-    "dataSesion",
-    JSON.stringify({
-      auth: data.auth,
-      token: data.token,
-      user: {
-        id: data.user.id,
-        username: data.user.username,
-        email: data.user.email,
-      },
-    })
-  );
+  localStorage.setItem("dataSesion", JSON.stringify(data));
   return {
     type: LOGIN_SUCCESS,
-    data,
+    data: data,
   };
 };
 
@@ -23,7 +16,7 @@ const loginFailure = (data) => {
   delete localStorage.dataSesion;
   return {
     type: LOGIN_FAILURE,
-    data,
+    data: data,
   };
 };
 

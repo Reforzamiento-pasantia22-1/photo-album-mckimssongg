@@ -6,7 +6,7 @@ function Image({ src, alt, is_activate }) {
   return (
     <div
       data-aos="fade-up"
-      className="col-12 col-md-6 col-lg-4 col-xl-3 content-image"
+      className="col-12 col-md-6 col-lg-4 col-xl-3 content-image mb-3"
     >
       <img src={src} alt={alt} />
       <p>{alt}</p>

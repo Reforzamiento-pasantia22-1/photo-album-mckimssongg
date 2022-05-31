@@ -9,7 +9,6 @@ function Logout({ name }) {
     <button
       className="btn btn-success me-3 btn-lg"
       onClick={() => {
-        console.log('hola')
         dispatch(open);
       }}
     >
