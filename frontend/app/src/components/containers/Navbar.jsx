@@ -7,6 +7,7 @@ import authUser from "../../utils/auth";
 import { Modal } from "../modals/index";
 import Form_login from "../Form_Login";
 import Logout_modal from "../Logout_modal";
+import Add_a_photon_modal from "../modals/Add_a_photo_modal";
 import Sing_in from "../Sing_in";
 import Search from "../Search";
 import Add_a_photo_button from "../Add_a_photo_button";
@@ -50,6 +51,11 @@ function Navbar() {
       </nav>
       {visibility && (
         <Modal>{auth.dataUser.auth ? <Logout_modal /> : <Form_login />}</Modal>
+      )}
+      {true && (
+        <Modal>
+          <Add_a_photon_modal />
+        </Modal>
       )}
     </React.Fragment>
   );
