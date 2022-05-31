@@ -9,4 +9,6 @@ const AppUI = combineReducers({
   reducer_images,
 });
 
-export default AppUI;
+import { createStore } from 'redux';
+let store = createStore(AppUI);
+export default store;
