@@ -1,6 +1,12 @@
-import { createStore } from 'redux';
-import AppUI from './reducers/index';
+import { combineReducers } from "redux";
+import { visibilityModal } from "./reducers/reducers_modals";
+import reducer_images from "./reducers/reducer_images";
+import  reducer_login  from "./reducers/reducer_login";
 
-let Store = createStore(AppUI);
+const AppUI = combineReducers({
+  visibilityModal,
+  reducer_login,
+  reducer_images,
+});
 
-export default Store;
+export default AppUI;

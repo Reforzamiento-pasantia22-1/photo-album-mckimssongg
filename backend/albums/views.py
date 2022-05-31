@@ -24,6 +24,11 @@ class SearchImageView(GenericViewSet):
                 album__user_id=int(userId),
                 label=labelImage
             ).order_by('-id')
+        elif userId is not None:
+            queryset = Image.objects.filter(
+                is_activate=True,
+                album__user_id=int(userId)
+            ).order_by('-id')
         return queryset
 
     def list(self, request, *args, **kwargs):

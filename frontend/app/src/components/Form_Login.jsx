@@ -1,11 +1,11 @@
 import React from "react";
-import fetchData from "../services/Api";
-import Store from "../store/index";
+import FetchData from "../services/Api";
+import { useSelector, useDispatch } from "react-redux";
 import { closed } from "../store/actions/actions_modal";
 import { loginFailure, loginSuccess } from "../store/actions/actions_login";
-import { connect } from "react-redux";
 
 function Form_login() {
+  const dispatch = useDispatch();
   const [ver, setVer] = React.useState(false);
   const [data, setData] = React.useState({
     email: "",
@@ -19,7 +19,7 @@ function Form_login() {
     });
   };
 
-  const getData = fetchData.getInstance();
+  const getData = FetchData.getInstance();
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -30,12 +30,12 @@ function Form_login() {
     );
     console.log(loginData);
     if (loginData.auth) {
-      loginSuccess(loginData);
+      dispatch(loginSuccess(loginData));
 
       window.location.reload();
-      Store.dispatch(closed);
+      dispatch(closed());
     } else {
-      loginFailure(loginData);
+      dispatch(loginFailure(loginData));
     }
   };
 
@@ -84,7 +84,7 @@ function Form_login() {
             <button
               className="btn btn-primary m-3 "
               onClick={() => {
-                Store.dispatch(closed);
+                dispatch(closed);
               }}
             >
               Canceled

@@ -4,26 +4,26 @@ const auth = authUser.getInstance();
 
 /**
  * @description Api service to make requests to the server and get the response
- * */ export default class fetchData {
-  private static instance: fetchData;
+ * */ export default class FetchData {
+  private static instance: FetchData;
   private static _url: string;
   private static _token: string;
 
   private constructor() {}
 
   private static init(): void {
-    fetchData._url = "http://localhost:8000/";
-    fetchData._token = auth.dataUser.auth ? auth.token : "";
+    FetchData._url = "http://localhost:8000/";
+    FetchData._token = auth.dataUser.auth ? auth.token : "";
   }
 
   /**
    *  @description: Initialize an instance if it is not yet created
    *  and it guarantees that it will always be the same instance
-   *  @returns {fetchData} instance of the class fetchData
-   * */ public static getInstance(): fetchData {
+   *  @returns {FetchData} instance of the class FetchData
+   * */ public static getInstance(): FetchData {
     if (!this.instance) {
       this.init();
-      this.instance = new fetchData();
+      this.instance = new FetchData();
     }
 
     return this.instance;
@@ -37,9 +37,9 @@ const auth = authUser.getInstance();
    * */ async fetch(url: string, method: any, body: object): Promise<any> {
     const headers = {
       "Content-Type": "application/json",
-      Authorization: "Token " + fetchData._token,
+      Authorization: "Token " + FetchData._token,
     };
-    const response = await fetch(fetchData._url + url, {
+    const response = await fetch(FetchData._url + url, {
       method: method,
       body: JSON.stringify(body),
       headers: headers,
@@ -62,7 +62,7 @@ const auth = authUser.getInstance();
     const headers = {
       "Content-Type": "application/json",
     };
-    const response = await fetch(fetchData._url + url, {
+    const response = await fetch(FetchData._url + url, {
       method: method,
       body: JSON.stringify(body),
       headers: headers,
@@ -80,7 +80,7 @@ const auth = authUser.getInstance();
     const headers = {
       "Content-Type": "application/json",
     };
-    const response = await fetch(fetchData._url + url, {
+    const response = await fetch(FetchData._url + url, {
       method: method,
       headers: headers,
     });

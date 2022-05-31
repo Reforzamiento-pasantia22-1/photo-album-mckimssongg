@@ -1,8 +1,11 @@
 import React from "react";
-import Store from "../store";
 import { closed } from "../store/actions/actions_modal";
 import { loginFailure } from "../store/actions/actions_login";
+import { useSelector, useDispatch } from "react-redux";
+
 function Logout_modal() {
+  const dispatch = useDispatch();
+
   return (
     <div
       className="form-bg bg-primary d-flex flex-column align-items-center rounded"
@@ -13,15 +16,14 @@ function Logout_modal() {
         <button
           className="btn btn-danger my-3 w-50"
           onClick={() => {
-
-            Store.dispatch(
+            dispatch(
               loginFailure({
                 message: "log out success",
                 auth: false,
               })
             );
             window.location.reload();
-            Store.dispatch(closed);
+            dispatch(closed);
           }}
         >
           log out
@@ -29,7 +31,7 @@ function Logout_modal() {
         <button
           className="btn btn-primary my-3 "
           onClick={() => {
-            Store.dispatch(closed);
+            dispatch(closed);
           }}
         >
           Canceled

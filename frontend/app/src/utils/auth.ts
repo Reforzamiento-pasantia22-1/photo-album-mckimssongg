@@ -1,5 +1,3 @@
-import Store from "../store/index";
-
 type User = {
   token?: string;
   auth: boolean;

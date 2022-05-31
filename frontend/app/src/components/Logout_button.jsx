@@ -1,16 +1,16 @@
 import React from "react";
 import { RiLogoutBoxFill } from "react-icons/ri";
-import Store from "../store/index";
+import { useSelector, useDispatch } from "react-redux";
 import { open } from "../store/actions/actions_modal";
 
-
-
 function Logout({ name }) {
+  const dispatch = useDispatch();
   return (
     <button
-      className="btn btn-outline-light me-3 btn-lg"
+      className="btn btn-success me-3 btn-lg"
       onClick={() => {
-        Store.dispatch(open);
+        console.log('hola')
+        dispatch(open);
       }}
     >
       <RiLogoutBoxFill />

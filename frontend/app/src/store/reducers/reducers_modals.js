@@ -1,7 +1,13 @@
-import { OPEN_MODAL, CLOSE_MODAL } from "../constants/index";
+import {
+  OPEN_MODAL,
+  CLOSE_MODAL,
+  OPEN_MODAL_ADD_PHOTO,
+  CLOSE_MODAL_ADD_PHOTO,
+} from "../constants/index";
 
 const initialState = {
   visibility: false,
+  visibility_add_photo: false,
 };
 
 function visibilityModal(state = initialState, action) {
@@ -16,6 +22,17 @@ function visibilityModal(state = initialState, action) {
         ...state,
         visibility: false,
       };
+    case OPEN_MODAL_ADD_PHOTO:
+      return {
+        ...state,
+        visibility_add_photo: true,
+      };
+    case CLOSE_MODAL_ADD_PHOTO:
+      return {
+        ...state,
+        visibility_add_photo: false,
+      };
+
     default:
       return state;
   }

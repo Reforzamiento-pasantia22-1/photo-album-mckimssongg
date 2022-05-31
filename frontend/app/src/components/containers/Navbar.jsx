@@ -1,6 +1,6 @@
 import React from "react";
 //redux
-import { connect } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import authUser from "../../utils/auth";
 
 // Components
@@ -13,14 +13,9 @@ import Add_a_photo_button from "../Add_a_photo_button";
 import Logout_button from "../Logout_button";
 import { FiSearch } from "react-icons/fi";
 
-const mapStateToProps = (state) => {
-  return {
-    visibility: state.visibilityModal.visibility
-  };
-};
-
-function Navbar({ visibility }) {
+function Navbar() {
   const auth = authUser.getInstance();
+  const visibility = useSelector((state) => state.visibilityModal.visibility);
   return (
     <React.Fragment>
       <nav className="navbar navbar-expand-lg navbar-dark bg-primary">
@@ -32,7 +27,7 @@ function Navbar({ visibility }) {
               <Sing_in />
             )}
             {auth.dataUser.auth ? (
-              <Add_a_photo_button color={"info"} />
+              <Add_a_photo_button color={"warning "} />
             ) : (
               <Add_a_photo_button color={"secondary disabled"} />
             )}
@@ -60,5 +55,4 @@ function Navbar({ visibility }) {
   );
 }
 
-
-export default connect(mapStateToProps,null)(Navbar);
+export default Navbar;
